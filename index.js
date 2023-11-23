@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// const authRoutes = require("./routes/auths.js");
+const authRoutes = require("./routes/auths.js");
 const userRoutes = require("./routes/users.js");
 const postRoutes = require("./routes/posts.js");
 const commentRoutes = require("./routes/comments.js");
@@ -29,22 +29,22 @@ app.use(
 );
 app.use(cookieParser());
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, './src/assets/avatar')
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + '-' + file.originalname)
-//   }
-// })
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './src/assets/avatar')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
 
-// const upload = multer({ storage: storage })
+const upload = multer({ storage: storage })
 
-// app.post('/i', upload.single('image'), (req, res) => {
-//   res.send(req.file.filename)
-// });
+app.post('/i', upload.single('image'), (req, res) => {
+  res.send(req.file.filename)
+});
 
-//app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
