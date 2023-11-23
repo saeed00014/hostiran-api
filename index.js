@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const authRoutes = require("./routes/auths.js");
-// const userRoutes = require("./routes/users.js");
+// const authRoutes = require("./routes/auths.js");
+const userRoutes = require("./routes/users.js");
 // const postRoutes = require("./routes/posts.js");
 // const commentRoutes = require("./routes/comments.js");
 // const likeRoutes = require("./routes/likes.js");
@@ -44,8 +44,8 @@ app.use(cookieParser());
 //   res.send(req.file.filename)
 // });
 
-app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+//app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 // app.use("/api/posts", postRoutes);
 // app.use("/api/comments", commentRoutes);
 // app.use("/api/likes", likeRoutes);
